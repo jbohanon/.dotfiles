@@ -26,6 +26,7 @@ else
 fi
 
 alias pls='sudo'
+alias sshdev='ssh jacob@192.168.10.70'
 alias cddf='cd $HOME/.dotfiles'
 alias nvdf='nvim $HOME/.dotfiles/README.md'
 
