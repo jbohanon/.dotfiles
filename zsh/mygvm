@@ -1,0 +1,80 @@
+#!/bin/bash
+
+valid='false'
+exists='false'
+list_versions() {
+    echo "valid options:"
+    for i in "$HOME"/.go/go1*; do basename "$i"; done
+    echo ""
+}
+
+install_version() {
+    check_valid $1
+    if [[ $valid != 'true' ]]; then
+        echo "invalid version $1"
+        echo "using"
+        go version
+        exit 1
+    fi
+
+    fname="$HOME/.go/downloads/$1.darwin-arm64.tar.gz"
+
+    if [[ ! -f $fname ]]; then
+        curl -Lo $fname https://dl.google.com/go/$1.darwin-arm64.tar.gz
+    fi
+    cd $HOME/.go/downloads
+    tar -zxf $1.darwin-arm64.tar.gz
+    mv go/ ../$1
+    check_exists $1
+    link_version $1
+}
+
+link_version() {
+    if [[ $exists == 'true' ]]; then
+        ln -sfn $HOME/.go/$1 $HOME/.go/go
+    fi
+}
+
+check_valid() {
+    if [[ $1 =~ go1\.[0-9]{1,2}\.[0-9]{1,2} ]]; then
+        valid='true'
+    fi
+}
+check_exists() {
+    if [[ -d $HOME/.go/$1 ]]; then
+        exists='true'
+    fi
+}
+
+check_exists $1
+if [[ $1 == '' ]]; then
+    list_versions
+    echo "using"
+    go version
+    exit 1
+elif [[ $1 == 'install' ]]; then
+    install_version $2
+elif [[ $exists == 'true' ]]; then
+    link_version $1
+else
+    echo "$1 not found in $HOME/.go"
+    list_versions
+    check_valid $1
+
+    if [[ $valid == 'true' ]]; then
+        echo "attempt to download and install? [y/n]"
+        read input
+        if [[ $input == 'y' ]]; then
+            install_version $1
+        fi
+    else
+        echo "invalid version $1"
+        echo "using"
+        go version
+        exit 1
+    fi
+fi
+
+echo "using"
+go version
+
