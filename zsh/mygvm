@@ -1,6 +1,6 @@
 #!/bin/bash
 list_versions() {
-    echo "valid options:"
+    echo "installed versions:"
     for i in "$HOME"/.go/go1*; do basename "$i"; done
     echo ""
 }
@@ -36,34 +36,28 @@ check_valid() {
         valid='true'
     fi
 }
+
 check_exists() {
     if [[ -d $HOME/.go/$1 ]]; then
         exists='true'
     fi
 }
 
-uname_m=$(uname -m)
-goarch='amd64'
-if [[ $uname_m == 'arm64' || $uname_m == 'aarch64' ]]; then
-    goarch='arm64'
-fi
-goos='linux'
-if [[ $(uname) == 'Darwin' ]]; then
-    goos='darwin'
-fi
-valid='false'
-exists='false'
+remove_version() {
+    check_exists $1
+    if [[ $exists == 'true' ]]; then
+        if [[ $current_link == $1 ]]; then
+            echo "cannot remove version $1 because it is currently in use"
+        else
+            rm -rf $HOME/.go/$1
+            echo "removed version $1"
+        fi
+    else
+        echo "version $1 not installed"
+    fi
+}
 
-check_exists $1
-if [[ $1 == '' ]]; then
-    list_versions
-    echo "using $(go version)"
-    exit 1
-elif [[ $1 == 'install' ]]; then
-    install_version $2
-elif [[ $exists == 'true' ]]; then
-    link_version $1
-else
+prompt_install() {
     echo "$1 not found in $HOME/.go"
     list_versions
     check_valid $1
@@ -79,6 +73,44 @@ else
         echo "using $(go version)"
         exit 1
     fi
+}
+
+mkdir -p "$HOME/.go/downloads"
+current_link=$(basename $(readlink $HOME/.go/go))
+uname_m=$(uname -m)
+goarch='amd64'
+if [[ $uname_m == 'arm64' || $uname_m == 'aarch64' ]]; then
+    goarch='arm64'
+fi
+goos='linux'
+if [[ $(uname) == 'Darwin' ]]; then
+    goos='darwin'
+fi
+valid='false'
+exists='false'
+
+check_exists $1
+if [[ $1 == '' ]]; then
+    list_versions
+elif [[ $1 == 'list' ]]; then
+    list_versions
+elif [[ $1 == 'remove' ]]; then
+    remove_version $2
+elif [[ $1 == 'uninstall' ]]; then
+    remove_version $2
+elif [[ $1 == 'install' ]]; then
+    install_version $2
+elif [[ $1 == 'use' ]]; then
+    check_exists $2
+    if [[ $exists == true ]]; then
+        link_version $2
+    else
+        prompt_install $2
+    fi
+elif [[ $exists == 'true' ]]; then
+    link_version $1
+else
+    prompt_install $1
 fi
 
 echo "using $(go version)"
