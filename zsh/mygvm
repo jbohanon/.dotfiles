@@ -1,16 +1,4 @@
 #!/bin/bash
-
-uname_m=$(uname -m)
-goarch='amd64'
-if [[ $uname_m == 'arm64' || $uname_m == 'aarch64' ]]; then
-    goarch='arm64'
-fi
-goos='linux'
-if [[ $(uname) == 'Darwin' ]]; then
-    goos='darwin'
-fi
-valid='false'
-exists='false'
 list_versions() {
     echo "valid options:"
     for i in "$HOME"/.go/go1*; do basename "$i"; done
@@ -21,8 +9,7 @@ install_version() {
     check_valid $1
     if [[ $valid != 'true' ]]; then
         echo "invalid version $1"
-        echo "using"
-        go version
+        echo "using $(go version)"
         exit 1
     fi
 
@@ -55,11 +42,22 @@ check_exists() {
     fi
 }
 
+uname_m=$(uname -m)
+goarch='amd64'
+if [[ $uname_m == 'arm64' || $uname_m == 'aarch64' ]]; then
+    goarch='arm64'
+fi
+goos='linux'
+if [[ $(uname) == 'Darwin' ]]; then
+    goos='darwin'
+fi
+valid='false'
+exists='false'
+
 check_exists $1
 if [[ $1 == '' ]]; then
     list_versions
-    echo "using"
-    go version
+    echo "using $(go version)"
     exit 1
 elif [[ $1 == 'install' ]]; then
     install_version $2
@@ -78,12 +76,10 @@ else
         fi
     else
         echo "invalid version $1"
-        echo "using"
-        go version
+        echo "using $(go version)"
         exit 1
     fi
 fi
 
-echo "using"
-go version
+echo "using $(go version)"
 
