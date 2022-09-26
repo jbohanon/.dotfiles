@@ -3,7 +3,7 @@
 #Install ripgrep
 #Install fd
 sudo add-apt-repository ppa:neovim-ppa/stable
-sudo apt update && sudo apt install -y zsh neovim ripgrep fd-find
+sudo apt update && sudo apt install -y zsh neovim ripgrep fd-find fzf
 #Install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 #Install oh-my-zsh plugins
