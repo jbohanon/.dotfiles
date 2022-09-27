@@ -30,3 +30,6 @@ ln -s $HOME/.dotfiles/zsh/mygvm /usr/local/bin/mygvm
 
 #Install Go
 mygvm go1.18.6
+
+#link gitconfig
+ln -s $HOME/.dotfiles/.gitconfig $HOME/.gitconfig

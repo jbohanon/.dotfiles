@@ -119,6 +119,7 @@ tnoremap <c-l> <c-\><c-n><c-w><c-l>
 tnoremap <Esc> <C-\><C-n>
 nnoremap <Leader>ee :NvimTreeFindFileToggle<cr>
 nnoremap <Leader>h <cmd>lua require("harpoon.mark").add_file()<cr>
+nnoremap <c-/> :Commentary<cr>
 
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
@@ -280,4 +281,8 @@ lua <<EOF
       { name = 'cmdline' }
     })
   })
+EOF
+
+lua << EOF
+require'lspconfig'.pyright.setup{}
 EOF
