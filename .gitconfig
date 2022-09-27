@@ -1,0 +1,9 @@
+[user]
+   name = Jacob Bohanon
+   email = jacobbohanon@gmail.com
+[url "ssh://git@github.com/"]
+        insteadOf = https://github.com/
+[tag]
+	sort = version:refname
+[init]
+	defaultBranch = master
