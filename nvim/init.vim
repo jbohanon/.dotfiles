@@ -95,7 +95,7 @@ nnoremap <Leader>fh <cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>
 nnoremap <Leader>err oif err != nil {<CR>return nil, err<CR>}<CR><esc>kkI<esc>
 nnoremap <buffer> <silent> <C-[> :GoReferrers<cr>
 
-nnoremap <Leader>q :bd<CR>
+nnoremap <Leader>q :bp\|bd #<CR>
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>n :bn<CR>
 nnoremap <Leader>b :bp<CR>
@@ -116,8 +116,10 @@ tnoremap <c-j> <c-\><c-n><c-w><c-j>
 tnoremap <c-k> <c-\><c-n><c-w><c-k>
 tnoremap <c-h> <c-\><c-n><c-w><c-h>
 tnoremap <c-l> <c-\><c-n><c-w><c-l>
+tnoremap <Esc> <C-\><C-n>
 nnoremap <Leader>ee :NvimTreeFindFileToggle<cr>
 nnoremap <Leader>h <cmd>lua require("harpoon.mark").add_file()<cr>
+nnoremap <c-/> :Commentary<cr>
 
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
@@ -279,4 +281,8 @@ lua <<EOF
       { name = 'cmdline' }
     })
   })
+EOF
+
+lua << EOF
+require'lspconfig'.pyright.setup{}
 EOF
