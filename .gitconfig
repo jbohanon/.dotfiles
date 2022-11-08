@@ -7,3 +7,5 @@
 	sort = version:refname
 [init]
 	defaultBranch = master
+[pull]
+	rebase = false

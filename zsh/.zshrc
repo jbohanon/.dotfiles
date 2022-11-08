@@ -2,6 +2,7 @@ export EDITOR=nvim
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:/opt/local/bin:$PATH
 
+ulimit -n 65536 200000
 
 # eksctl
 fpath=($fpath ~/.zsh/completion)
@@ -38,3 +39,4 @@ for conf in "$HOME/.config/zsh/config.d/"*.zsh; do
   source "${conf}"
 done
 unset conf
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
