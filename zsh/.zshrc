@@ -2,6 +2,8 @@ export EDITOR=nvim
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:/opt/local/bin:$PATH
 
+ulimit -n 65536 200000
+ulimit -f unlimited
 
 # eksctl
 fpath=($fpath ~/.zsh/completion)
@@ -34,13 +36,15 @@ alias nvdf='nvim $HOME/.dotfiles/README.md'
 alias cls='clear'
 export PATH="/opt/homebrew/opt/protobuf@3.6/bin:$PATH"
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 for conf in "$HOME/.config/zsh/config.d/"*.zsh; do
   source "${conf}"
 done
 unset conf
 
-[[ -s "/home/jacob/.gvm/scripts/gvm" ]] && source "/home/jacob/.gvm/scripts/gvm"
+export STARSHIP_CONFIG=~/.config/zsh/starship.toml
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+eval "$(starship init zsh)"
