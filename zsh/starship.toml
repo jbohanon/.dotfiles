@@ -1,0 +1,164 @@
+# ~/.config/starship.toml
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+# Change command timeout from 500 to 1000 ms
+command_timeout = 1000
+
+# Change the default prompt format
+format = """
+[╭╴](238)$env_var \
+$username\
+$hostname\
+$localip\
+$directory\
+$time\
+$line_break\
+[|](238)$shlvl\
+$singularity\
+$vcsh\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$kubernetes\
+$hg_branch\
+$docker_context\
+$package\
+$c\
+$cmake\
+$cobol\
+$daml\
+$dart\
+$deno\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$golang\
+$haskell\
+$helm\
+$java\
+$julia\
+$kotlin\
+$lua\
+$nim\
+$nodejs\
+$ocaml\
+$perl\
+$php\
+$pulumi\
+$purescript\
+$python\
+$raku\
+$rlang\
+$red\
+$ruby\
+$rust\
+$scala\
+$swift\
+$terraform\
+$vlang\
+$vagrant\
+$zig\
+$buf\
+$nix_shell\
+$conda\
+$meson\
+$spack\
+$memory_usage\
+$aws\
+$gcloud\
+$openstack\
+$azure\
+$crystal\
+$custom\
+$sudo\
+$cmd_duration\
+$jobs\
+$battery\
+$status\
+$container\
+$shell\
+$line_break\
+[╰─](238)$character"""
+
+# Change the default prompt characters
+[character]
+error_symbol = "[✘](bold red)"
+success_symbol = ""
+
+[time]
+disabled = false
+
+# Shows an icon that should be included by zshrc script based on the distribution or os
+[env_var.STARSHIP_DISTRO]
+format = '[$env_value](white)'
+variable = "STARSHIP_DISTRO"
+disabled = false
+
+# Shows the username
+[username]
+style_user = "white"
+style_root = "white"
+format = "[$user]($style) "
+disabled = false
+show_always = true
+
+[hostname]
+ssh_only = true
+format = "on [$hostname](bold yellow) "
+disabled = false
+
+[directory]
+truncate_to_repo = true
+home_symbol = " ~"
+read_only_style = "197"
+read_only = "  "
+format = "at [$path]($style)[$read_only]($read_only_style) "
+
+[git_branch]
+symbol = " "
+format = "[$symbol$branch]($style) "
+style = "bold green"
+
+[git_status]
+format = '[\(( $all_status)($ahead_behind)\)]($style) '
+style = "bold green"
+conflicted = "🏳"
+up_to_date = " "
+untracked = " "
+ahead = "⇡${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+behind = "⇣${count}"
+stashed = " "
+modified = " "
+staged = '[++$count ](green)'
+renamed = "襁 "
+deleted = " "
+
+[kubernetes]
+format = '[///](238) [ﴱ $context](bold purple) '
+disabled = false
+
+[python]
+format = '[///](238) [${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+symbol = " "
+python_binary = "python3"
+disabled = false
+
+[nodejs]
+format = "[///](238) [ $version](bold green) "
+disabled = false
+
+[golang]
+format = "[///](238) [$symbol($version )]($style)"
+symbol = "ﳑ "
+
+[package]
+disabled = true
+
+[gcloud]
+format = '[///](238) [$symbol$account(@$domain)(\($region\))]($style) '
