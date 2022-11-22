@@ -140,7 +140,7 @@ renamed = "襁 "
 deleted = " "
 
 [kubernetes]
-format = '[///](238) [ﴱ $context](bold purple) '
+format = '[///](238) [ﴱ ($user)@$context](bold purple) '
 disabled = false
 
 [python]
