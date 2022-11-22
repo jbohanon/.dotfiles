@@ -20,7 +20,7 @@ set scrolloff=8
 set colorcolumn=80,120
 set signcolumn=yes
 set cmdheight=2
-set title
+set notitle
 set updatetime=50
 highlight Normal guibg=none
 
@@ -201,7 +201,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
 end
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 require('lspconfig')['gopls'].setup{
     on_attach = on_attach,
     capabilities = capabilities,
