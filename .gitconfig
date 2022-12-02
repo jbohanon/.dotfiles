@@ -9,3 +9,5 @@
 	defaultBranch = master
 [pull]
 	rebase = false
+[color]
+	ui = auto

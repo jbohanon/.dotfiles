@@ -33,8 +33,8 @@ ln -s $HOME/.config/nvim/init.vim $HOME/.vimrc
 ln -s $HOME/.config/zsh/.zshrc $HOME/.zshrc
 ln -s $HOME/.config/tmux/tmux.conf $HOME/.tmux.conf
 
-#Install powerline-fonts
-which apt && $PKGINST fonts-powerline || which dnf && $PKGINST powerline-fonts
+##Install powerline-fonts
+#which apt && $PKGINST fonts-powerline || which dnf && $PKGINST powerline-fonts
 
 #Install starship
 curl -sS https://starship.rs/install.sh | sh

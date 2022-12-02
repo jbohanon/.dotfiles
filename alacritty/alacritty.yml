@@ -1,11 +1,20 @@
 window:
   opacity: 0.7
-    #decorations: none
-    #dimensions:
-    #lines: 120
-    #columns: 120
+  # decorations: none
+  dimensions:
+    lines: 115
+    columns: 257
+  position:
+    x: 1550
+    y: 0
 selection:
   save_to_clipboard: true
+shell:
+  program: /usr/bin/zsh
+  args:
+    - -l
+    - -c
+    - tmux attach || tmux
 font:
   # Normal (roman) font face
   normal:
