@@ -22,7 +22,8 @@ set signcolumn=yes
 set cmdheight=2
 set notitle
 set updatetime=50
-highlight Normal guibg=none
+au ColorScheme * hi Normal guibg=none ctermbg=none
+au ColorScheme * hi NonText guibg=none ctermbg=none
 
 call plug#begin('~/.vim/plugged')
 
