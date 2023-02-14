@@ -20,4 +20,8 @@ alias cdea='cd $HOME/src/github.com/solo-io/ext-auth-service'
 alias nvea='nvim $HOME/src/github.com/solo-io/ext-auth-service/README.md'
 alias cdrl='cd $HOME/src/github.com/solo-io/rate-limiter'
 alias nvrl='nvim $HOME/src/github.com/solo-io/rate-limiter/README.md'
+alias cdeg='cd $HOME/src/github.com/solo-io/envoy-gloo'
+alias nveg='nvim $HOME/src/github.com/solo-io/envoy-gloo/README.md'
+alias cdee='cd $HOME/src/github.com/solo-io/envoy-gloo-ee'
+alias nvee='nvim $HOME/src/github.com/solo-io/envoy-gloo-ee/README.md'
 
