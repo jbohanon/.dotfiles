@@ -204,6 +204,12 @@ local on_attach = function(client, bufnr)
 end
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 require('lspconfig')['gopls'].setup{
+    settings = {
+        gopls = {
+            templateExtensions = {'gotmpl', 'gohtml'},
+        }
+    },
+    filetypes = { "go", "gomod", "gowork", "gotmpl", "gohtml", "gohtmltmpl" },
     on_attach = on_attach,
     capabilities = capabilities,
 }
@@ -302,4 +308,9 @@ lua <<EOF
 EOF
 
 lua << EOF
+vim.filetype.add({
+    extension = {
+        gohtml = "gohtmltmpl"
+    }
+})
 EOF
