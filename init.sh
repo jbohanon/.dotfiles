@@ -25,12 +25,12 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 [[ ! -d $HOME/.dotfiles ]] && cd $HOME && git clone https://github.com/jbohanon/.dotfiles
 
 #Make directories & symlinks
-mkdir  -p $HOME/.config
-ln -s $HOME/.dotfiles/zsh $HOME/.config/zsh
-ln -s $HOME/.dotfiles/nvim $HOME/.config/nvim
-ln -s $HOME/.dotfiles/tmux $HOME/.config/tmux
+mkdir -p $HOME/.config
+ln -s $HOME/.dotfiles/zsh/ $HOME/.config/zsh
+ln -s $HOME/.dotfiles/nvim/ $HOME/.config/nvim
+ln -s $HOME/.dotfiles/tmux/ $HOME/.config/tmux
 ln -s $HOME/.config/nvim/init.vim $HOME/.vimrc
-ln -s $HOME/.config/zsh/.zshrc $HOME/.zshrc
+mv $HOME/.zshrc $HOME/.zshrc.bak && ln -s $HOME/.config/zsh/.zshrc $HOME/.zshrc
 ln -s $HOME/.config/tmux/tmux.conf $HOME/.tmux.conf
 
 ##Install powerline-fonts
@@ -45,7 +45,7 @@ mkdir -p $HOME/.go/downloads
 sudo ln -s $HOME/.dotfiles/zsh/mygvm /usr/local/bin/mygvm
 
 #Install Go
-mygvm install go1.18.6
+mygvm install go1.20.1
 
 #link gitconfig
 ln -s $HOME/.dotfiles/.gitconfig $HOME/.gitconfig
@@ -53,6 +53,7 @@ ln -s $HOME/.dotfiles/.gitconfig $HOME/.gitconfig
 #Install kubectl
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+rm ./kubectl
 
 #install nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
