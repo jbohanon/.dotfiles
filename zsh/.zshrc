@@ -28,9 +28,8 @@ else
 fi
 
 alias pls='sudo'
-alias sshdev='ssh jacob@192.168.10.70'
 alias cddf='cd $HOME/.dotfiles'
-alias nvdf='nvim $HOME/.dotfiles/README.md'
+alias nvdf='cddf && nvim $HOME/.dotfiles/README.md'
 alias cdjb='cd $HOME/src/github.com/jbohanon'
 
 if [[ $(uname) == Linux ]]; then
@@ -56,16 +55,16 @@ eval "$(starship init zsh)"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/usr/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/usr/etc/profile.d/conda.sh" ]; then
-        . "/usr/etc/profile.d/conda.sh"
-    else
-        export PATH="/usr/bin:$PATH"
-    fi
-fi
-unset __conda_setup
+# __conda_setup="$('/usr/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     eval "$__conda_setup"
+# else
+#     if [ -f "/usr/etc/profile.d/conda.sh" ]; then
+#         . "/usr/etc/profile.d/conda.sh"
+#     else
+#         export PATH="/usr/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
 # <<< conda initialize <<<
 
