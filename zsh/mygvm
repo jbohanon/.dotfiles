@@ -6,7 +6,7 @@ list_versions() {
 }
 
 install_version() {
-    check_valid $1
+    check_valid_patch $1
     if [[ $valid != 'true' ]]; then
         echo "invalid version $1"
         echo "using $(go version)"
@@ -31,7 +31,13 @@ link_version() {
     fi
 }
 
-check_valid() {
+check_valid_minor() {
+    if [[ $1 =~ go1\.[0-9]{1,2} ]]; then
+        valid='true'
+    fi
+}
+
+check_valid_patch() {
     if [[ $1 =~ go1\.[0-9]{1,2}\.[0-9]{1,2} ]]; then
         valid='true'
     fi
@@ -57,10 +63,20 @@ remove_version() {
     fi
 }
 
+get_latest_patch_for_minor() {
+    version=$(curl -s "https://go.dev/dl/?mode=json" | grep -o "$1.*.linux-amd64.tar.gz" | head -n 1 | tr -d '\r\n' | sed 's/[.]linux-amd64[.]tar[.]gz//')
+    if [[ $version == '' ]]; then
+        echo "could not determine latest version for $1. Only n-1 are supported by this feature."
+        exit 1
+    else
+        echo "latest $1 patch: $version"
+    fi
+}
+
 prompt_install() {
     echo "$1 not found in $HOME/.go"
     list_versions
-    check_valid $1
+    check_valid_patch $1
 
     if [[ $valid == 'true' ]]; then
         echo "attempt to download and install? [y/n]"
@@ -69,9 +85,20 @@ prompt_install() {
             install_version $1
         fi
     else
-        echo "invalid version $1"
-        echo "using $(go version)"
-        exit 1
+        check_valid_minor $1
+        if [[ $valid == 'true' ]]; then
+            get_latest_patch_for_minor $1
+            check_exists $version
+            if [[ $exists == 'true' ]]; then
+               link_version $version
+            else
+                prompt_install $version
+            fi
+        else
+            echo "invalid version $1"
+            echo "using $(go version)"
+            exit 1
+        fi
     fi
 }
 
@@ -88,6 +115,8 @@ if [[ $(uname) == 'Darwin' ]]; then
 fi
 valid='false'
 exists='false'
+
+version=''
 
 check_exists $1
 if [[ $1 == '' ]]; then
