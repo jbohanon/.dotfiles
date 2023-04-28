@@ -64,9 +64,9 @@ remove_version() {
 }
 
 get_latest_patch_for_minor() {
-    version=$(curl -s "https://go.dev/dl/?mode=json" | grep -o "$1.*.linux-amd64.tar.gz" | head -n 1 | tr -d '\r\n' | sed 's/[.]linux-amd64[.]tar[.]gz//')
+    version=$(curl -s "https://go.dev/dl/?mode=json&include=all" | grep -o "$1.*.linux-amd64.tar.gz" | head -n 1 | tr -d '\r\n' | sed 's/[.]linux-amd64[.]tar[.]gz//')
     if [[ $version == '' ]]; then
-        echo "could not determine latest version for $1. Only n-1 are supported by this feature."
+        echo "could not determine latest version for $1."
         exit 1
     else
         echo "latest $1 patch: $version"
