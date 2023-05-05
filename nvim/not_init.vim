@@ -1,97 +1,105 @@
 imap jj <Esc>
 
-set number
-set relativenumber
-set tabstop=4 softtabstop=4
-set shiftwidth=4
-set expandtab
-set smartindent
-set nohlsearch
-set hidden
-set noerrorbells
-set nowrap
-set noswapfile
-set nobackup
-set undodir=~/.vim/undodir
-set undofile
-set incsearch
-set termguicolors
-set scrolloff=8
-set colorcolumn=80,120
-set signcolumn=yes
-set cmdheight=2
-set notitle
-set updatetime=50
-au ColorScheme * hi Normal guibg=none ctermbg=none
-au ColorScheme * hi NonText guibg=none ctermbg=none
+" set number
+" set relativenumber
+" set tabstop=4 softtabstop=4
+" set shiftwidth=4
+" set expandtab
+" set smartindent
+" set nohlsearch
+" set hidden
+" set noerrorbells
+" set nowrap
+" set noswapfile
+" set nobackup
+" set undodir=~/.vim/undodir
+" set undofile
+" set incsearch
+" set termguicolors
+" set scrolloff=8
+" set colorcolumn=80,120
+" set signcolumn=yes
+" set cmdheight=2
+" set notitle
+" set updatetime=50
+" au ColorScheme * hi Normal guibg=none ctermbg=none
+" au ColorScheme * hi NonText guibg=none ctermbg=none
 
-call plug#begin('~/.vim/plugged')
+" call plug#begin('~/.vim/plugged')
 
-Plug 'voldikss/vim-floaterm'
-Plug 'mbbill/undotree'
-Plug 'wellle/context.vim'
+" Plug 'voldikss/vim-floaterm'
+" Plug 'mbbill/undotree'
+" Plug 'wellle/context.vim'
 
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-surround'
+" Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-commentary'
+" Plug 'tpope/vim-surround'
 
-Plug 'f-person/git-blame.nvim'
+" Plug 'f-person/git-blame.nvim'
 
-Plug 'gruvbox-community/gruvbox'
+" Plug 'gruvbox-community/gruvbox'
 
-Plug 'nvim-lua/plenary.nvim'
-Plug 'ThePrimeagen/harpoon'
+" Plug 'nvim-lua/plenary.nvim'
+" Plug 'ThePrimeagen/harpoon'
 
-Plug 'BurntSushi/ripgrep'
+" Plug 'BurntSushi/ripgrep'
 
-Plug 'sharkdp/fd'
+" Plug 'sharkdp/fd'
 
-Plug 'nvim-treesitter/nvim-treesitter'
+" Plug 'nvim-treesitter/nvim-treesitter'
 
-Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+" Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 
-Plug 'nvim-telescope/telescope.nvim'
+" Plug 'nvim-telescope/telescope.nvim'
 
-Plug 'airblade/vim-gitgutter'
+" Plug 'airblade/vim-gitgutter'
 
-Plug 'liuchengxu/vista.vim'
+" Plug 'liuchengxu/vista.vim'
 
-" Completion
-Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/nvim-cmp'
+" " Completion
+" Plug 'neovim/nvim-lspconfig'
+" Plug 'hrsh7th/cmp-nvim-lsp'
+" Plug 'hrsh7th/cmp-buffer'
+" Plug 'hrsh7th/cmp-path'
+" Plug 'hrsh7th/cmp-cmdline'
+" Plug 'hrsh7th/nvim-cmp'
 
-" For vsnip users.
-Plug 'hrsh7th/cmp-vsnip'
-Plug 'hrsh7th/vim-vsnip'
+" " For vsnip users.
+" Plug 'hrsh7th/cmp-vsnip'
+" Plug 'hrsh7th/vim-vsnip'
 
-" Go plugins
-Plug 'fatih/vim-go'
-Plug 'Shougo/neocomplete.vim'
+" " Go plugins
+" Plug 'fatih/vim-go'
+" Plug 'Shougo/neocomplete.vim'
 
-Plug 'majutsushi/tagbar'
+" Plug 'majutsushi/tagbar'
 
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'kyazdani42/nvim-tree.lua'
-Plug 'ellisonleao/glow.nvim', {'branch': 'main'}
-Plug 'tpope/vim-dispatch'
-call plug#end()
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
+" Plug 'kyazdani42/nvim-web-devicons'
+" Plug 'kyazdani42/nvim-tree.lua'
+" Plug 'ellisonleao/glow.nvim', {'branch': 'main'}
+" Plug 'tpope/vim-dispatch'
+" call plug#end()
 
 let $GINKGO_EDITOR_INTEGRATION = "true"
 
-lua require('nvim-tree').setup()
+" lua require('nvim-tree').setup()
+
+" set foldmethod=expr
+" set foldexpr=nvim_treesitter#foldexpr()
+" set nofoldenable                     " Disable folding at startup.
+" nnoremap zz za<CR>
+" nnoremap ZZ zA<CR>
 
 " Find files using Telescope command-line sugar.
 let mapleader = " "
 nnoremap <Leader>ff <cmd>lua require('telescope.builtin').find_files({hidden = true, file_ignore_patterns = {"^.git"}})<cr>
 nnoremap <Leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <Leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <Leader>ft <cmd>lua require('telescope.builtin').grep_string()<cr>
 nnoremap <Leader>fh <cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>
+nnoremap <Leader>tr <cmd>lua require('telescope.builtin').treesitter()<cr>
 
 nnoremap <Leader>err oif err != nil {<CR>return nil, err<CR>}<CR><esc>kkI<esc>
 nnoremap <buffer> <silent> <C-[> :GoReferrers<cr>
@@ -178,6 +186,7 @@ lua << EOF
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap=true, silent=true }
 vim.keymap.set('n', '<space>d', vim.diagnostic.open_float, opts)
+vim.keymap.set('n', '<space>dd', require'telescope.builtin'.diagnostics, opts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<space>dl', vim.diagnostic.setloclist, opts)
@@ -191,15 +200,18 @@ local on_attach = function(client, bufnr)
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   local bufopts = { noremap=true, silent=true, buffer=bufnr }
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+  --vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+  vim.keymap.set('n', 'gD', require'telescope.builtin'.lsp_type_definitions, bufopts)
+  --vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+  vim.keymap.set('n', 'gd', require'telescope.builtin'.lsp_definitions, bufopts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+  vim.keymap.set('n', 'gi', require'telescope.builtin'.lsp_implementations, bufopts)
   vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
   vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
   vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+  --vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+  vim.keymap.set('n', 'gr', require'telescope.builtin'.lsp_references, bufopts)
   vim.keymap.set('n', '<space>f', vim.lsp.buf.format, bufopts)
 end
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
