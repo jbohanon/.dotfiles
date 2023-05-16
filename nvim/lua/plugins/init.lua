@@ -58,4 +58,8 @@ Plug 'tpope/vim-dispatch'
 
 vim.call('plug#end')
 
+require("plugins/floaterm")
+require("plugins/harpoon")
+require("plugins/telescope")
 require("plugins/treesitter")
+require("plugins/nvim-cmp")

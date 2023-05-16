@@ -1,6 +1,8 @@
+vim.g.mapleader = " "
+
 require("sets")
 require("plugins")
-require("remaps")
+require("keymaps")
 require("lsp")
 require("theme")
 

@@ -1,5 +1,5 @@
-vim.api.nvim_set_option('number', true)
-vim.api.nvim_set_option('relativenumber', true)
+vim.api.nvim_win_set_option(0, 'number', true)
+vim.api.nvim_win_set_option(0, 'relativenumber', true)
 vim.api.nvim_win_set_option(0, 'wrap', false)
 
 vim.api.nvim_set_option('tabstop', 4)
@@ -23,5 +23,5 @@ vim.api.nvim_set_option('updatetime', 50)
 vim.api.nvim_set_option('swapfile', false)
 vim.api.nvim_set_option('backup', false)
 vim.api.nvim_set_option('undofile', true)
-vim.api.nvim_set_option('undodir', '~/.vim/undodir')
+vim.api.nvim_set_option('undodir', vim.fn.expand('~')..'/.vim/undodir')
 
