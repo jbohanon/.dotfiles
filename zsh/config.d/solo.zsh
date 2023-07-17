@@ -15,6 +15,7 @@ REPOS=(
 "gloo-mesh-enterprise"
 "ext-auth-service"
 "rate-limiter"
+"caching-service"
 "envoy-gloo"
 "envoy-gloo-ee"
 )
@@ -58,6 +59,8 @@ alias cdea='cd $SOLO_DIR/ext-auth-service'
 alias nvea='cdea && nvim_readme'
 alias cdrl='cd $SOLO_DIR/rate-limiter'
 alias nvrl='cdrl && nvim_readme'
+alias cdcs='cd $SOLO_DIR/caching-service'
+alias nvcs='cdcs && nvim_readme'
 alias cdeg='cd $SOLO_DIR/envoy-gloo'
 alias nveg='cdeg && nvim_readme'
 alias cdee='cd $SOLO_DIR/envoy-gloo-ee'
