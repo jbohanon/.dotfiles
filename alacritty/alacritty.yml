@@ -14,7 +14,7 @@ shell:
   args:
     - -l
     - -c
-    - tmux attach || tmux
+    - zellij attach || zellij
 font:
   # Normal (roman) font face
   normal:
