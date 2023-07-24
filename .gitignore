@@ -1,1 +1,5 @@
 ignore/
+nvim/nvim
+tmux/tmux
+zellij/zellij
+zsh/zsh
