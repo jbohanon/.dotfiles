@@ -1,59 +1,65 @@
 #!/bin/bash
 
+# Make sure we have our local bin directory
+sudo mkdir -p /usr/local/bin
+
 which apt && PKGINST='sudo apt install -y' && PKGUPD='sudo apt update' || which dnf && PKGINST='sudo dnf install -y' && PKGUPD='sudo dnf update -y'
 
 echo "PKGUPD: ${PKGUPD}"
 echo "PKGINST: ${PKGINST}"
 
-#Install zsh, neovim, ripgrep, fd
+# Install zsh, neovim, ripgrep, fd
 which apt && sudo add-apt-repository ppa:neovim-ppa/stable || which dnf && sudo dnf copr enable agriffis/neovim-nightly
 [[ $PKGINST != '' ]] && $PKGUPD && $PKGINST zsh neovim ripgrep fd-find fzf
 
-#Install oh-my-zsh
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# install zellij
+curl -L -o "$HOME/Downloads/zellij.tar.gz" "https://github.com/zellij-org/zellij/releases/latest/download/zellij-x86_64-unknown-linux-musl.tar.gz"
+tar -zxf "$HOME/Downloads/zellij.tar.gz"
+sudo mv zellij /usr/local/bin/zellij
+rm "$HOME/Downloads/zellij.tar.gz"
 
-#Install oh-my-zsh plugins
-if [[ -d $HOME/.oh-my-zsh ]]; then
-  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-fi
 
-#install vim-plug
+# install vim-plug
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
-#Clone dotfiles
-[[ ! -d $HOME/.dotfiles ]] && cd $HOME && git clone https://github.com/jbohanon/.dotfiles
-
-#Make directories & symlinks
+# Make directories & symlinks
 mkdir -p $HOME/.config
 ln -s $HOME/.dotfiles/zsh/ $HOME/.config/zsh
 ln -s $HOME/.dotfiles/nvim/ $HOME/.config/nvim
 ln -s $HOME/.dotfiles/tmux/ $HOME/.config/tmux
 ln -s $HOME/.config/nvim/init.vim $HOME/.vimrc
 mv $HOME/.zshrc $HOME/.zshrc.bak && ln -s $HOME/.config/zsh/.zshrc $HOME/.zshrc
-ln -s $HOME/.config/tmux/tmux.conf $HOME/.tmux.conf
 
-##Install powerline-fonts
+## Install powerline-fonts
 #which apt && $PKGINST fonts-powerline || which dnf && $PKGINST powerline-fonts
 
-#Install starship
+# Install starship
 curl -sS https://starship.rs/install.sh | sh
 
-#Install mygvm
+# Install mygvm
 mkdir $HOME/go
 mkdir -p $HOME/.go/downloads
 sudo ln -s $HOME/.dotfiles/zsh/mygvm /usr/local/bin/mygvm
 
-#Install Go
+# Install Go
 mygvm install go1.20.1
 
-#link gitconfig
+# link gitconfig
 ln -s $HOME/.dotfiles/.gitconfig $HOME/.gitconfig
 
-#Install kubectl
+# Install kubectl
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 rm ./kubectl
 
-#install nvm
+# install nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
+
+# Install oh-my-zsh
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# Install oh-my-zsh plugins
+if [[ -d $HOME/.oh-my-zsh ]]; then
+  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+fi
