@@ -3,7 +3,7 @@
 # Make sure we have our local bin directory
 sudo mkdir -p /usr/local/bin
 
-which apt && PKGINST='sudo apt install -y' && PKGUPD='sudo apt update' || which dnf && PKGINST='sudo dnf install -y' && PKGUPD='sudo dnf update -y'
+which dnf && PKGINST='sudo dnf install -y' && PKGUPD='sudo dnf update -y' || which apt && PKGINST='sudo apt install -y' && PKGUPD='sudo apt update'
 
 echo "PKGUPD: ${PKGUPD}"
 echo "PKGINST: ${PKGINST}"
@@ -24,9 +24,10 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 
 # Make directories & symlinks
 mkdir -p $HOME/.config
-ln -s $HOME/.dotfiles/zsh/ $HOME/.config/zsh
-ln -s $HOME/.dotfiles/nvim/ $HOME/.config/nvim
-ln -s $HOME/.dotfiles/tmux/ $HOME/.config/tmux
+ln -s $HOME/.dotfiles/zsh/    $HOME/.config/zsh
+ln -s $HOME/.dotfiles/nvim/   $HOME/.config/nvim
+ln -s $HOME/.dotfiles/tmux/   $HOME/.config/tmux
+ln -s $HOME/.dotfiles/zellij/ $HOME/.config/zellij
 ln -s $HOME/.config/nvim/init.vim $HOME/.vimrc
 mv $HOME/.zshrc $HOME/.zshrc.bak && ln -s $HOME/.config/zsh/.zshrc $HOME/.zshrc
 
