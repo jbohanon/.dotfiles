@@ -1,6 +1,6 @@
 [user]
    name = Jacob Bohanon
-   email = jacobbohanon@gmail.com
+	email = jacob.bohanon@solo.io
 [url "ssh://git@github.com/"]
         insteadOf = https://github.com/
 [tag]

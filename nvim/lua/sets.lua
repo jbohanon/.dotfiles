@@ -25,3 +25,5 @@ vim.api.nvim_set_option('backup', false)
 vim.api.nvim_set_option('undofile', true)
 vim.api.nvim_set_option('undodir', vim.fn.expand('~')..'/.vim/undodir')
 
+-- Completion config
+vim.api.nvim_set_option('completeopt', 'menu,menuone,noselect,noinsert,preview')
