@@ -1,5 +1,3 @@
-vim.api.nvim_set_option('laststatus', 2)
-vim.cmd('colorscheme gruvbox')
 local themegroup = vim.api.nvim_create_augroup('themegroup', { clear = true })
 
 vim.api.nvim_create_autocmd('ColorScheme', {
@@ -12,3 +10,5 @@ vim.api.nvim_create_autocmd('ColorScheme', {
     group = themegroup,
     command = "hi NonText guibg=none ctermbg=none",
 })
+vim.api.nvim_set_option('laststatus', 2)
+vim.cmd('colorscheme gruvbox')
