@@ -16,7 +16,7 @@ local nav_file = function(n)
     end
 end
 
-harpmap('<Leader>ee', require('harpoon.mark').add_file)
+harpmap('<Leader>h', require('harpoon.mark').add_file)
 harpmap('<Leader>fh', harp.toggle_quick_menu)
 harpmap('<Leader>1', nav_file(1))
 harpmap('<Leader>2', nav_file(2))

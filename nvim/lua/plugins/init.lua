@@ -56,6 +56,8 @@ Plug 'kyazdani42/nvim-tree.lua'
 Plug('ellisonleao/glow.nvim', { branch = 'main' })
 Plug 'tpope/vim-dispatch'
 
+Plug 'jamestthompson3/nvim-remote-containers'
+
 vim.call('plug#end')
 
 require("plugins/airline")
