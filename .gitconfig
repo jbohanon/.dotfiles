@@ -1,8 +1,9 @@
 [user]
-   name = Jacob Bohanon
+    name = Jacob Bohanon
 	email = jacob.bohanon@solo.io
+	signingkey = /home/jacob/.ssh/id_ed25519.pub
 [url "ssh://git@github.com/"]
-        insteadOf = https://github.com/
+    insteadOf = https://github.com/
 [tag]
 	sort = version:refname
 [init]
@@ -11,3 +12,7 @@
 	rebase = false
 [color]
 	ui = auto
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true
