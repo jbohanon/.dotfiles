@@ -28,6 +28,9 @@ else
 fi
 
 alias pls='sudo'
+alias mm='merge-main.sh'
+alias gmc='git merge --continue'
+alias kci='git commit --allow-empty --message "kick CI" && git push'
 alias cddf='cd $HOME/.dotfiles'
 alias nvdf='cddf && nvim $HOME/.dotfiles/README.md'
 alias cdjb='cd $HOME/src/github.com/jbohanon'

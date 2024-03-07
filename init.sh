@@ -9,8 +9,17 @@ echo "PKGUPD: ${PKGUPD}"
 echo "PKGINST: ${PKGINST}"
 
 # Install zsh, neovim, ripgrep, fd
-which apt && sudo add-apt-repository ppa:neovim-ppa/stable || which dnf && sudo dnf copr enable agriffis/neovim-nightly
-[[ $PKGINST != '' ]] && $PKGUPD && $PKGINST zsh neovim ripgrep fd-find fzf
+[[ $PKGINST != '' ]] && $PKGUPD && $PKGINST zsh ripgrep fd-find fzf
+
+# Install neovim
+pushd /tmp || true
+git clone https://github.com/neovim/neovim
+pushd neovim \
+  && make CMAKE_BUILD_TYPE=RelWithDebInfo \
+  && sudo make install
+popd || true
+rm -rf neovim/
+popd || true
 
 # install zellij
 curl -L -o "$HOME/Downloads/zellij.tar.gz" "https://github.com/zellij-org/zellij/releases/latest/download/zellij-x86_64-unknown-linux-musl.tar.gz"
@@ -32,7 +41,7 @@ ln -s $HOME/.config/nvim/init.vim $HOME/.vimrc
 mv $HOME/.zshrc $HOME/.zshrc.bak && ln -s $HOME/.config/zsh/.zshrc $HOME/.zshrc
 
 ## Install powerline-fonts
-#which apt && $PKGINST fonts-powerline || which dnf && $PKGINST powerline-fonts
+which apt && $PKGINST fonts-powerline || which dnf && $PKGINST powerline-fonts
 
 # Install starship
 curl -sS https://starship.rs/install.sh | sh
@@ -43,7 +52,11 @@ mkdir -p $HOME/.go/downloads
 sudo ln -s $HOME/.dotfiles/zsh/mygvm /usr/local/bin/mygvm
 
 # Install Go
-mygvm install go1.20.1
+mygvm install go1.22.0
+
+# Install merge-main.sh
+mkdir -p $HOME/.local/bin
+sudo ln -s $HOME/.dotfiles/zsh/merge-main.sh $HOME/.local/bin/merge-main.sh
 
 # link gitconfig
 ln -s $HOME/.dotfiles/.gitconfig $HOME/.gitconfig

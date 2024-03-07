@@ -1,9 +1,9 @@
 vim.api.nvim_create_augroup('jbohanon', {clear=true})
-vim.api.nvim_create_autocmd('BufWritePre', {
-    pattern = '*',
-    group = 'jbohanon',
-    command = '%s/\\s\\+$//e',
-})
+-- vim.api.nvim_create_autocmd('BufWritePre', {
+--     pattern = '*',
+--     group = 'jbohanon',
+--     command = '%s/\\s\\+$//e',
+-- })
 vim.api.nvim_create_autocmd('FileType', {
     pattern = {'yaml','cpp'},
     group = 'jbohanon',
