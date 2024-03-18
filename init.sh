@@ -33,6 +33,7 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 
 # Make directories & symlinks
 mkdir -p $HOME/.config
+cp -r ./ $HOME/.dotfiles
 ln -s $HOME/.dotfiles/zsh/    $HOME/.config/zsh
 ln -s $HOME/.dotfiles/nvim/   $HOME/.config/nvim
 ln -s $HOME/.dotfiles/tmux/   $HOME/.config/tmux
