@@ -58,6 +58,8 @@ Plug 'tpope/vim-dispatch'
 
 Plug 'jamestthompson3/nvim-remote-containers'
 
+Plug 'epwalsh/obsidian.nvim'
+
 vim.call('plug#end')
 
 require("plugins/airline")
@@ -67,3 +69,4 @@ require("plugins/telescope")
 require("plugins/treesitter")
 require("plugins/nvim-cmp")
 require("plugins/vim-go")
+require("plugins/obsidian")

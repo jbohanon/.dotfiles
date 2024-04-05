@@ -38,6 +38,7 @@ ln -s $HOME/.dotfiles/zsh/    $HOME/.config/zsh
 ln -s $HOME/.dotfiles/nvim/   $HOME/.config/nvim
 ln -s $HOME/.dotfiles/tmux/   $HOME/.config/tmux
 ln -s $HOME/.dotfiles/zellij/ $HOME/.config/zellij
+ln -s $HOME/.dotfiles/mygvm/ $HOME/.config/mygvm
 ln -s $HOME/.config/nvim/init.vim $HOME/.vimrc
 mv $HOME/.zshrc $HOME/.zshrc.bak && ln -s $HOME/.config/zsh/.zshrc $HOME/.zshrc
 
@@ -50,7 +51,7 @@ curl -sS https://starship.rs/install.sh | sh
 # Install mygvm
 mkdir $HOME/go
 mkdir -p $HOME/.go/downloads
-sudo ln -s $HOME/.dotfiles/zsh/mygvm /usr/local/bin/mygvm
+sudo ln -s $HOME/.dotfiles/mygvm/mygvm /usr/local/bin/mygvm
 
 # Install Go
 mygvm install go1.22.0

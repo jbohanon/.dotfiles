@@ -23,6 +23,8 @@ install_version() {
     mv go/ ../$1
     check_exists $1
     link_version $1
+
+    install_modules
 }
 
 link_version() {
@@ -102,6 +104,22 @@ prompt_install() {
     fi
 }
 
+install_modules() {
+    fname="$HOME/.config/mygvm/modules_to_install"
+    echo "attempting to install nvim required binaries and modules at $fname"
+    [[ ! -f $fname ]] && echo "no modules file at $fname" && return
+
+    while IFS= read -r line; do
+    if [[ "$line" != "" ]]; then 
+        echo "running go install $line"
+        go install $line
+    fi
+    done < "$HOME/.config/mygvm/modules_to_install"
+
+    [[ $(which nvim) ]] && nvim --headless +GoInstallBinaries +q
+    echo ""
+}
+
 mkdir -p "$HOME/.go/downloads"
 current_link=$(basename $(readlink $HOME/.go/go))
 uname_m=$(uname -m)
@@ -136,6 +154,9 @@ elif [[ $1 == 'use' ]]; then
     else
         prompt_install $2
     fi
+    install_modules
+elif [[ $1 == 'modules' ]]; then
+    install_modules
 elif [[ $exists == 'true' ]]; then
     link_version $1
 else
