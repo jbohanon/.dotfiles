@@ -25,6 +25,8 @@ Plug 'nvim-treesitter/nvim-treesitter'
 
 Plug('nvim-telescope/telescope-fzf-native.nvim', { ['do'] = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' })
 
+Plug('nvim-telescope/telescope-live-grep-args.nvim')
+
 Plug 'nvim-telescope/telescope.nvim'
 
 Plug 'airblade/vim-gitgutter'
@@ -59,6 +61,8 @@ Plug 'tpope/vim-dispatch'
 Plug 'jamestthompson3/nvim-remote-containers'
 
 Plug 'epwalsh/obsidian.nvim'
+
+Plug 'ziglang/zig.vim'
 
 vim.call('plug#end')
 

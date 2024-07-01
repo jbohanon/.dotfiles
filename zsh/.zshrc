@@ -7,6 +7,9 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:/opt/local/bin:$PATH
 
+# Add the zig path used by myzvm
+export PATH=$HOME/.zig/zig:$PATH
+
 ulimit -n 65536 200000
 ulimit -f unlimited
 
@@ -39,6 +42,7 @@ alias kci='git commit --allow-empty --message "kick CI" && git push'
 alias cddf='cd $HOME/.dotfiles'
 alias nvdf='cddf && nvim $HOME/.dotfiles/README.md'
 alias cdjb='cd $HOME/src/github.com/jbohanon'
+alias cdgh='cd $HOME/src/github.com'
 alias cdo='cd $HOME/Documents/obsidian/work'
 alias nvo='cdo && nvim .'
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 list_versions() {
     echo "installed versions:"
-    for i in "$HOME"/.go/go1*; do basename "$i"; done
+    for i in "$HOME"/.zig/zig0*; do basename "$i"; done
     echo ""
 }
 
@@ -9,18 +9,24 @@ install_version() {
     check_valid_patch $1
     if [[ $valid != 'true' ]]; then
         echo "invalid version $1"
-        echo "using $(go version)"
+        echo "using $(zig version)"
         exit 1
     fi
 
-    fname="$HOME/.go/downloads/$1.$goos-$goarch.tar.gz"
+    fname="$HOME/.zig/downloads/zig-$zigos-$zigarch-$1"
+    tarball_name="$fname.tar.xz"
+
+    url_subdir="download/$1"
+    if [[ $1 =~ .*dev.* ]]; then
+        url_subdir="builds"
+    fi
 
     if [[ ! -f $fname ]]; then
-        curl -Lo $fname https://dl.google.com/go/$1.$goos-$goarch.tar.gz
+        curl -Lo $tarball_name https://ziglang.org/$url_subdir/zig-$zigos-$zigarch-$1.tar.xz
     fi
-    cd $HOME/.go/downloads
-    tar -zxf $1.$goos-$goarch.tar.gz
-    mv go/ ../$1
+    cd $download_dir
+    tar -xJf $tarball_name
+    mv $fname/ ../$1
     check_exists $1
     link_version $1
 
@@ -29,24 +35,24 @@ install_version() {
 
 link_version() {
     if [[ $exists == 'true' ]]; then
-        ln -sfn $HOME/.go/$1 $HOME/.go/go
+        ln -sfn $zig_dir/$1 $zig_dir/zig
     fi
 }
 
 check_valid_minor() {
-    if [[ $1 =~ go1\.[0-9]{1,2} ]]; then
+    if [[ $1 =~ 0\.[0-9]{1,2} ]]; then
         valid='true'
     fi
 }
 
 check_valid_patch() {
-    if [[ $1 =~ go1\.[0-9]{1,2}\.[0-9]{1,2} ]]; then
+    if [[ $1 =~ 0\.[0-9]{1,2}\.[0-9]{1,2}.* ]]; then
         valid='true'
     fi
 }
 
 check_exists() {
-    if [[ -d $HOME/.go/$1 ]]; then
+    if [[ -d $zig_dir/$1 ]]; then
         exists='true'
     fi
 }
@@ -57,7 +63,7 @@ remove_version() {
         if [[ $current_link == $1 ]]; then
             echo "cannot remove version $1 because it is currently in use"
         else
-            rm -rf $HOME/.go/$1
+            rm -rf $zig_dir/$1
             echo "removed version $1"
         fi
     else
@@ -66,7 +72,7 @@ remove_version() {
 }
 
 get_latest_patch_for_minor() {
-    version=$(curl -s "https://go.dev/dl/?mode=json&include=all" | grep -o "$1.*.linux-amd64.tar.gz" | head -n 1 | tr -d '\r\n' | sed 's/[.]linux-amd64[.]tar[.]gz//')
+    version=$(curl -s "https://ziglang.org/download/index.json" | grep -o "zig-linux-x86_64-$1.*.tar.xz" | head -n 1 | tr -d '\r\n' | sed 's/zig-linux-x86_64-\(.*\).tar.xz/\1/g')
     if [[ $version == '' ]]; then
         echo "could not determine latest version for $1."
         exit 1
@@ -75,21 +81,32 @@ get_latest_patch_for_minor() {
     fi
 }
 
+get_latest_patch_for_nightly() {
+    get_latest_patch_for_minor
+}
+
 prompt_install() {
-    echo "$1 not found in $HOME/.go"
-    list_versions
-    check_valid_patch $1
+    if [[ "$1" == "" ]]; then
+        echo "installing nightly build"
+        valid=true
+        get_latest_patch_for_nightly
+    else 
+        echo "$1 not found in $zig_dir"
+        list_versions
+        check_valid_patch $1
+        version=$1
+    fi
 
     if [[ $valid == 'true' ]]; then
         echo "attempt to download and install? [y/n]"
         read input
         if [[ $input == 'y' ]]; then
-            install_version $1
+            install_version $version
         fi
     else
-        check_valid_minor $1
+        check_valid_minor $version
         if [[ $valid == 'true' ]]; then
-            get_latest_patch_for_minor $1
+            get_latest_patch_for_minor $version
             check_exists $version
             if [[ $exists == 'true' ]]; then
                link_version $version
@@ -97,39 +114,43 @@ prompt_install() {
                 prompt_install $version
             fi
         else
-            echo "invalid version $1"
-            echo "using $(go version)"
+            echo "invalid version $version"
+            echo "using $(zig version)"
             exit 1
         fi
     fi
 }
 
 install_modules() {
-    fname="$HOME/.config/mygvm/modules_to_install"
-    echo "attempting to install nvim required binaries and modules at $fname"
-    [[ ! -f $fname ]] && echo "no modules file at $fname" && return
-
-    while IFS= read -r line; do
-    if [[ "$line" != "" ]]; then 
-        echo "running go install $line"
-        go install $line
-    fi
-    done < "$HOME/.config/mygvm/modules_to_install"
-
-    [[ $(which nvim) ]] && nvim --headless +GoInstallBinaries +q
-    echo ""
+    echo "no modules to install for zig"
 }
+#     fname="$HOME/.config/mygvm/modules_to_install"
+#     echo "attempting to install nvim required binaries and modules at $fname"
+#     [[ ! -f $fname ]] && echo "no modules file at $fname" && return
 
-mkdir -p "$HOME/.go/downloads"
-current_link=$(basename $(readlink $HOME/.go/go))
+#     while IFS= read -r line; do
+#     if [[ "$line" != "" ]]; then 
+#         echo "running go install $line"
+#         go install $line
+#     fi
+#     done < "$HOME/.config/mygvm/modules_to_install"
+
+#     [[ $(which nvim) ]] && nvim --headless +GoInstallBinaries +q
+#     echo ""
+# }
+
+zig_dir="$HOME/.zig"
+download_dir="$zig_dir/downloads"
+mkdir -p "$download_dir"
+current_link=$(basename $(readlink $HOME/.zig/zig))
 uname_m=$(uname -m)
-goarch='amd64'
+zigarch='x86_64'
 if [[ $uname_m == 'arm64' || $uname_m == 'aarch64' ]]; then
-    goarch='arm64'
+    zigarch='aarch64'
 fi
-goos='linux'
+zigos='linux'
 if [[ $(uname) == 'Darwin' ]]; then
-    goos='darwin'
+    zigos='darwin'
 fi
 valid='false'
 exists='false'
@@ -148,19 +169,13 @@ elif [[ $1 == 'uninstall' ]]; then
 elif [[ $1 == 'install' ]]; then
     install_version $2
 elif [[ $1 == 'use' ]]; then
-    if [[ $2 == 'local' ]]; then
-        go_mod_json=$(go mod edit -json)
-        if [[ $? == 1 ]]; then
-            echo "unable to find go.mod"
-            echo "using $(go version)"
-            exit 1
-        else
-            version_to_use=go$(jq -r .Go <<< $go_mod_json)
-        fi
+    if [[ $2 == 'nightly' ]]; then
+        version_to_use=
+        exists=false
     else
         version_to_use=$2
+        check_exists $version_to_use
     fi
-    check_exists $version_to_use
     if [[ $exists == true ]]; then
         link_version $version_to_use
     else
@@ -175,5 +190,5 @@ else
     prompt_install $1
 fi
 
-echo "using $(go version)"
+echo "using $(zig version)"
 

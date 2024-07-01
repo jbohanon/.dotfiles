@@ -99,3 +99,13 @@ require('lspconfig')['lua_ls'].setup {
         Lua = {}
     }
 }
+require('lspconfig')['zls'].setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = { '/home/jacob/src/github.com/zigtools/zls/zig-out/bin/zls' },
+  settings = {
+    zls = {
+      zig_exe_path = '/home/jacob/.zig/zig/zig',
+    }
+  }
+}

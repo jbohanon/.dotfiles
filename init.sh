@@ -39,6 +39,7 @@ ln -s $HOME/.dotfiles/nvim/   $HOME/.config/nvim
 ln -s $HOME/.dotfiles/tmux/   $HOME/.config/tmux
 ln -s $HOME/.dotfiles/zellij/ $HOME/.config/zellij
 ln -s $HOME/.dotfiles/mygvm/ $HOME/.config/mygvm
+ln -s $HOME/.dotfiles/myzvm/ $HOME/.config/myzvm
 ln -s $HOME/.config/nvim/init.vim $HOME/.vimrc
 mv $HOME/.zshrc $HOME/.zshrc.bak && ln -s $HOME/.config/zsh/.zshrc $HOME/.zshrc
 
@@ -55,6 +56,13 @@ sudo ln -s $HOME/.dotfiles/mygvm/mygvm /usr/local/bin/mygvm
 
 # Install Go
 mygvm install go1.22.0
+
+# Install myzvm
+mkdir -p $HOME/.zig/downloads
+sudo ln -s $HOME/.dotfiles/myzvm/myzvm /usr/local/bin/myzvm
+
+# Install Zig
+myzvm install nightly
 
 # Install merge-main.sh
 mkdir -p $HOME/.local/bin
