@@ -49,6 +49,9 @@ require('lspconfig')['tsserver'].setup {
 require('lspconfig')['clangd'].setup {
     on_attach = on_attach,
     capabilities = capabilities,
+    -- This is the default list of filetypes excluding proto
+    -- https://github.com/neovim/nvim-lspconfig/blob/0ef64599b8aa0187ee5f6d92cb39c951f348f041/lua/lspconfig/server_configurations/clangd.lua#L70C5-L70C66
+    filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' }
 }
 require('lspconfig')['rust_analyzer'].setup {
     on_attach = on_attach,
@@ -108,4 +111,8 @@ require('lspconfig')['zls'].setup {
       zig_exe_path = '/home/jacob/.zig/zig/zig',
     }
   }
+}
+require('lspconfig')['protols'].setup{
+    on_attach = on_attach,
+    capabilities = capabilities,
 }

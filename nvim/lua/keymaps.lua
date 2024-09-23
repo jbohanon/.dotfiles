@@ -42,6 +42,7 @@ vnoremap('K', ':m \'<-2<CR>gv=gv')
 
 nnoremap('<Leader>ee', ':NvimTreeFindFileToggle<cr>')
 vnoremap('<Leader>/', ':Commentary<cr>')
+nnoremap('<Leader>/', ':Commentary<cr>')
 
 -- golang error handling
 nnoremap('<Leader>err', 'oif err != nil {<CR>return nil, err<CR>}<CR><esc>kkI<esc>')
