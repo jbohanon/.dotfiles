@@ -2,7 +2,7 @@ export EDITOR=nvim
 
 # Set homebrew before my own path mods so brew binaries (specifically go)
 # don't override my expected tooling
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+if [[ -d "/home/linuxbrew" ]]; then eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"; fi
 
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:/opt/local/bin:$PATH
