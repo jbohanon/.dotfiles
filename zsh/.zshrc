@@ -5,7 +5,7 @@ export EDITOR=nvim
 if [[ -d "/home/linuxbrew" ]]; then eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"; fi
 
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:/opt/local/bin:$PATH
+export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:/opt/local/bin:$HOME/.node_modules/bin:$PATH
 
 # Add the zig path used by myzvm
 export PATH=$HOME/.zig/zig:$PATH
@@ -29,10 +29,6 @@ else
   echo ""
   echo "see https://github.com/settings/tokens for creating a github access token"
   echo "export GITHUB_TOKEN=<token>"
-  echo ""
-  echo "see https://github.com/solo-io/licensing for generating licenses"
-  echo "export GLOO_LICENSE_KEY=<gloo edge enterprise license>"
-  echo "export GLOO_MESH_LICENSE_KEY=<gloo mesh enterprise license>"
 fi
 
 alias pls='sudo'
@@ -65,5 +61,13 @@ unset conf
 export TERM=xterm-256color
 
 export STARSHIP_CONFIG=~/.config/zsh/starship.toml
+
+# the gitclone.sh script is designed to be run in a subshell. it executes
+# the git clone and then returns a pushd to the caller. With this function, we
+# simply `eval` that command so that we effectively git clone a repo from anywhere
+# into the correct directory and the move into that directory
+function gclone () {
+    eval $(gitclone.sh $1)
+}
 
 eval "$(starship init zsh)"

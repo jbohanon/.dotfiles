@@ -9,7 +9,7 @@ echo "PKGUPD: ${PKGUPD}"
 echo "PKGINST: ${PKGINST}"
 
 # Install zsh, neovim, ripgrep, fd
-[[ $PKGINST != '' ]] && $PKGUPD && $PKGINST zsh ripgrep fd-find fzf
+[[ $PKGINST != '' ]] && $PKGUPD && $PKGINST curl tmux zsh ripgrep fd-find fzf
 
 # Install neovim
 pushd /tmp || true
@@ -22,10 +22,10 @@ rm -rf neovim/
 popd || true
 
 # install zellij
-curl -L -o "$HOME/Downloads/zellij.tar.gz" "https://github.com/zellij-org/zellij/releases/latest/download/zellij-x86_64-unknown-linux-musl.tar.gz"
-tar -zxf "$HOME/Downloads/zellij.tar.gz"
-sudo mv zellij /usr/local/bin/zellij
-rm "$HOME/Downloads/zellij.tar.gz"
+# curl -L -o "$HOME/Downloads/zellij.tar.gz" "https://github.com/zellij-org/zellij/releases/latest/download/zellij-x86_64-unknown-linux-musl.tar.gz"
+# tar -zxf "$HOME/Downloads/zellij.tar.gz"
+# sudo mv zellij /usr/local/bin/zellij
+# rm "$HOME/Downloads/zellij.tar.gz"
 
 
 # install vim-plug
@@ -67,6 +67,7 @@ myzvm install nightly
 # Install merge-main.sh
 mkdir -p $HOME/.local/bin
 sudo ln -s $HOME/.dotfiles/zsh/merge-main.sh $HOME/.local/bin/merge-main.sh
+sudo ln -s $HOME/.dotfiles/zsh/gitclone.sh $HOME/.local/bin/gitclone.sh
 
 # link gitconfig
 ln -s $HOME/.dotfiles/.gitconfig $HOME/.gitconfig

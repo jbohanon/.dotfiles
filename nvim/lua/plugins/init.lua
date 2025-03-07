@@ -60,9 +60,11 @@ Plug 'tpope/vim-dispatch'
 
 Plug 'jamestthompson3/nvim-remote-containers'
 
-Plug 'epwalsh/obsidian.nvim'
+-- Plug 'epwalsh/obsidian.nvim'
 
 Plug 'ziglang/zig.vim'
+
+Plug 'madox2/vim-ai'
 
 vim.call('plug#end')
 
@@ -73,4 +75,5 @@ require("plugins/telescope")
 require("plugins/treesitter")
 require("plugins/nvim-cmp")
 require("plugins/vim-go")
-require("plugins/obsidian")
+-- require("plugins/obsidian")
+require("plugins/ai")
