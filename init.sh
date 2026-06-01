@@ -9,7 +9,7 @@ echo "PKGUPD: ${PKGUPD}"
 echo "PKGINST: ${PKGINST}"
 
 # Install zsh, neovim, ripgrep, fd
-[[ $PKGINST != '' ]] && $PKGUPD && $PKGINST curl tmux zsh ripgrep fd-find fzf
+[[ $PKGINST != '' ]] && $PKGUPD && $PKGINST curl tmux zsh ripgrep fd-find fzf tree
 
 # Install neovim
 pushd /tmp || true
