@@ -70,4 +70,8 @@ function gclone () {
     eval $(gitclone.sh $1)
 }
 
+alias sz='source $HOME/.zshrc'
+
 eval "$(starship init zsh)"
+
+. "$HOME/.local/share/../bin/env"

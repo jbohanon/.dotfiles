@@ -5,7 +5,7 @@ url=$1
 # make sure we have a valid git url. only works with http/s
 regex='^https?://[^/]+/[^/]+/[^/]+(\.git)?$'
 
-if [[ ! $"url" =~ $regex ]]; then
+if [[ ! "$url" =~ $regex ]]; then
     echo "echo \"$url does not match regex\""
     exit 1
 fi
