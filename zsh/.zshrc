@@ -41,6 +41,8 @@ alias cdjb='cd $HOME/src/github.com/jbohanon'
 alias cdgh='cd $HOME/src/github.com'
 alias cdo='cd $HOME/Documents/obsidian/work'
 alias nvo='cdo && nvim .'
+alias cddd='cd $HOME/src/github.com/AustinRobinson/DrivingDoc'
+alias nvdd='cddd && nvim .'
 
 if [[ $(uname) == Linux ]]; then
   alias pbcopy='xsel --clipboard --input'
@@ -74,4 +76,4 @@ alias sz='source $HOME/.zshrc'
 
 eval "$(starship init zsh)"
 
-. "$HOME/.local/share/../bin/env"
+# [[ -f "$HOME/.local/share/../bin/env" ]] && . "$HOME/.local/share/../bin/env"

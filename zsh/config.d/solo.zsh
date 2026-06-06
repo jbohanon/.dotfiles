@@ -1,3 +1,5 @@
+if [[ -f "$HOME/.work-machine" ]]; then
+
 SOLO_DIR="$HOME/src/github.com/solo-io"
 SOLO_GITHUB="https://github.com/solo-io"
 
@@ -111,3 +113,4 @@ alias nvagwe='cdagwe && nvim_readme'
 alias cdkgw='cd $KGW_DIR/kgateway'
 alias nvkgw='cdkgw && nvim_readme'
 
+fi
