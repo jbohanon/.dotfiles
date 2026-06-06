@@ -1,10 +1,13 @@
 [user]
     name = Jacob Bohanon
-	email = jacobbohanon@gmail.com
+	email = jacob.bohanon@solo.io
 	signingkey = /home/jacob/.ssh/id_ed25519.pub
 [url "ssh://git@github.com/"]
     insteadOf = https://github.com/
-; [url "ssh://git@git.nonahob.net:2096/"]
+[includeIf "gitdir:~/src/git.nonahob.net/"]
+    path = ~/.gitconfig-personal
+[includeIf "gitdir:~/.dotfiles/"]
+    path = ~/.gitconfig-personal
 [url "ssh://git@192.168.10.50:30009/"]
     insteadOf = https://git.nonahob.net/
 [tag]
@@ -31,9 +34,9 @@
     prompt = true
 [mergetool "nvimdiff"]
     cmd = "nvim -d \"$LOCAL\" \"$REMOTE\" \"$MERGED\" -c 'wincmd w' -c 'wincmd J'"
-[credential "https://github.com"]
-	helper = 
-	helper = !/usr/bin/gh auth git-credential
-[credential "https://gist.github.com"]
-	helper = 
-	helper = !/usr/bin/gh auth git-credential
+#[credential "https://github.com"]
+#	helper = 
+#	helper = !/usr/bin/gh auth git-credential
+#[credential "https://gist.github.com"]
+#	helper = 
+#	helper = !/usr/bin/gh auth git-credential
