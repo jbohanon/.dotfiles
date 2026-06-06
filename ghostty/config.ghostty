@@ -1,1 +1,8 @@
 font-family = "FiraCode Nerd Font Mono"
+
+background-opacity = 0.8
+
+command = "/usr/bin/zsh -c 'tmux attach || tmux'"
+initial-command = "/usr/bin/zsh -c 'tmux attach || tmux'"
+
+keybind = shift+enter=text:\n
