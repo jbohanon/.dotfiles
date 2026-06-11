@@ -113,4 +113,21 @@ alias nvagwe='cdagwe && nvim_readme'
 alias cdkgw='cd $KGW_DIR/kgateway'
 alias nvkgw='cdkgw && nvim_readme'
 
+alias claude-vertex="CLAUDE_CONFIG_DIR=$HOME/.claude-vertex claude"
+alias claude-license="CLAUDE_CONFIG_DIR=$HOME/.claude-license claude"
+
+export CLAUDE_CONFIG_DIR="$HOME/.claude-license"
+
+function default-claude() {
+    if [[ -z "$1" ]] || ([[ "$1" != "vertex" ]] && [[ "$1" != "license" ]]); then
+        echo "invalid arg; must be 'vertex' or 'license'"
+        return
+    fi
+
+    if [[ "$1" == "vertex" ]]; then
+        export CLAUDE_CONFIG_DIR="$HOME/.claude-vertex"
+    elif [[ "$1" == "license" ]]; then
+        export CLAUDE_CONFIG_DIR="$HOME/.claude-license"
+    fi
+}
 fi
