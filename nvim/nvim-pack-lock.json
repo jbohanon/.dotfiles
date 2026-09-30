@@ -69,6 +69,10 @@
       "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
       "src": "https://github.com/nvim-lua/plenary.nvim"
     },
+    "sidekick.nvim": {
+      "rev": "3d80a47e6375f6d647c9695d3afea6fa1b3275df",
+      "src": "https://github.com/folke/sidekick.nvim"
+    },
     "telescope-live-grep-args.nvim": {
       "rev": "53e9df55b3651dd7cf77e172f1e8c9a17407acca",
       "src": "https://github.com/nvim-telescope/telescope-live-grep-args.nvim"
@@ -80,10 +84,6 @@
     "undotree": {
       "rev": "6fa6b57cda8459e1e4b2ca34df702f55242f4e4d",
       "src": "https://github.com/mbbill/undotree"
-    },
-    "vim-ai": {
-      "rev": "f46c2343a7d81c74ab249214ed9d0a9c6edac07f",
-      "src": "https://github.com/madox2/vim-ai"
     },
     "vim-airline": {
       "rev": "ae24f4aca06731d5d7224df1fc5415975331b214",

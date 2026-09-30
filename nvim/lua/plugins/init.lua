@@ -45,7 +45,7 @@ vim.pack.add({
     { src = gh('ellisonleao/glow.nvim'), version = 'main' },
 
     gh('jamestthompson3/nvim-remote-containers'),
-    gh('madox2/vim-ai'),
+    gh('folke/sidekick.nvim'),
 })
 
 require("plugins/airline")
@@ -55,4 +55,4 @@ require("plugins/telescope")
 require("plugins/treesitter")
 require("plugins/nvim-cmp")
 require("plugins/vim-go")
-require("plugins/ai")
+require("plugins/sidekick")
