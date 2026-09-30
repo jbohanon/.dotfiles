@@ -7,8 +7,6 @@ if [[ -d "/home/linuxbrew" ]]; then eval "$(/home/linuxbrew/.linuxbrew/bin/brew 
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:/opt/local/bin:$HOME/.node_modules/bin:$PATH
 
-# Add the zig path used by myzvm
-export PATH=$HOME/.zig/zig:$PATH
 
 ulimit -n 65536 200000
 ulimit -f unlimited
