@@ -37,12 +37,6 @@ vim.lsp.config('gopls', {
     filetypes = { "go", "gomod", "gowork", "gotmpl", "gohtml", "gohtmltmpl" },
 })
 
-vim.lsp.config('clangd', {
-    -- default filetypes excluding proto
-    -- https://github.com/neovim/nvim-lspconfig/blob/0ef64599b8aa0187ee5f6d92cb39c951f348f041/lua/lspconfig/server_configurations/clangd.lua#L70C5-L70C66
-    filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' }
-})
-
 vim.lsp.config('lua_ls', {
     on_init = function(client)
         local path = client.workspace_folders[1].name
@@ -67,25 +61,10 @@ vim.lsp.config('lua_ls', {
     }
 })
 
-vim.lsp.config('zls', {
-    cmd = { '/home/jacob/src/github.com/zigtools/zls/zig-out/bin/zls' },
-    settings = {
-        zls = {
-            zig_exe_path = '/home/jacob/.zig/zig/zig',
-        }
-    }
-})
-
 vim.lsp.enable({
     'gopls',
-    'pyright',
-    'ts_ls',
-    'clangd',
     'rust_analyzer',
+    'ts_ls',
     'bashls',
-    'bzl',
-    'cmake',
     'lua_ls',
-    'zls',
-    'protols',
 })
