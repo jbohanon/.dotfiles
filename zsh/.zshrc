@@ -32,6 +32,7 @@ else
 fi
 
 alias pls='sudo'
+alias oc='opencode'
 alias mm='merge-main.sh'
 alias gmc='git merge --continue'
 alias kci='git commit --allow-empty --message "kick CI" && git push'
@@ -77,3 +78,6 @@ alias sz='source $HOME/.zshrc'
 eval "$(starship init zsh)"
 
 # [[ -f "$HOME/.local/share/../bin/env" ]] && . "$HOME/.local/share/../bin/env"
+
+# opencode
+export PATH=/home/jacob/.opencode/bin:$PATH
