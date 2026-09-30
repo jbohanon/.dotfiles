@@ -36,7 +36,7 @@ vim.pack.add({
     gh('hrsh7th/vim-vsnip'),
 
     gh('fatih/vim-go'),
-    gh('ziglang/zig.vim'),
+    gh('stevearc/conform.nvim'),
 
     gh('vim-airline/vim-airline'),
     gh('vim-airline/vim-airline-themes'),
@@ -56,3 +56,4 @@ require("plugins/treesitter")
 require("plugins/nvim-cmp")
 require("plugins/vim-go")
 require("plugins/sidekick")
+require("plugins/conform")

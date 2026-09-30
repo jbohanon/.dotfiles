@@ -20,6 +20,10 @@
       "rev": "989a8a73c44e926199bfd05fa7a516d51f2d2752",
       "src": "https://github.com/hrsh7th/cmp-vsnip"
     },
+    "conform.nvim": {
+      "rev": "016802de402556da54c36bd7359b441266b01cdd",
+      "src": "https://github.com/stevearc/conform.nvim"
+    },
     "context.vim": {
       "rev": "b779a19653e94d4a7d6e668f1d71e48de34591fa",
       "src": "https://github.com/wellle/context.vim"

@@ -5,7 +5,7 @@ export EDITOR=nvim
 if [[ -d "/home/linuxbrew" ]]; then eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"; fi
 
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:/opt/local/bin:$HOME/.node_modules/bin:$PATH
+export PATH=$HOME/bin:$HOME/.local/bin:$HOME/.cargo/bin:/usr/local/bin:/opt/local/bin:$HOME/.node_modules/bin:$PATH
 
 
 ulimit -n 65536 200000

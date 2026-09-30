@@ -32,7 +32,7 @@ link() { # link <src> <dest>; backs up real files, replaces stale symlinks
 
 install_packages() {
   sudo apt-get update
-  sudo apt-get install -y git curl tar tmux zsh ripgrep fd-find fzf tree fonts-powerline
+  sudo apt-get install -y git curl tar tmux zsh ripgrep fd-find fzf tree fonts-powerline shellcheck
   if have fdfind && ! have fd; then
     ln -sfn "$(command -v fdfind)" "$BIN/fd"
   fi
@@ -84,6 +84,51 @@ install_nvm() {
   curl -fsSL "https://raw.githubusercontent.com/nvm-sh/nvm/$NVM_VERSION/install.sh" | PROFILE=/dev/null bash
 }
 
+load_nvm() {
+  export NVM_DIR="$HOME/.nvm"
+  set +u
+  # shellcheck disable=SC1091
+  source "$NVM_DIR/nvm.sh"
+  set -u
+}
+
+install_node() {
+  load_nvm
+  have node || { set +u; nvm install --lts; set -u; }
+}
+
+install_rust() {
+  export PATH="$HOME/.cargo/bin:$PATH"
+  if ! have rustup; then
+    curl -fsSL https://sh.rustup.rs -o "$TMP/rustup.sh"
+    sh "$TMP/rustup.sh" -y --no-modify-path
+  fi
+  rustup component add rust-analyzer clippy rustfmt
+}
+
+install_lua_ls() {
+  have lua-language-server && return
+  [[ $ARCH == amd64 ]] && local la=x64 || local la=arm64
+  local url
+  url="$(curl -fsSL https://api.github.com/repos/LuaLS/lua-language-server/releases/latest \
+    | grep -o "https[^\"]*linux-$la.tar.gz" | head -1)"
+  rm -rf "$HOME/.local/lua-language-server"
+  mkdir -p "$HOME/.local/lua-language-server"
+  curl -fsSL "$url" | tar -xz -C "$HOME/.local/lua-language-server"
+  ln -sfn "$HOME/.local/lua-language-server/bin/lua-language-server" "$BIN/lua-language-server"
+}
+
+install_language_servers() {
+  export PATH="$HOME/.cargo/bin:$PATH"
+  load_nvm
+  have gopls || { export PATH="$HOME/.go/go/bin:$PATH"; go install golang.org/x/tools/gopls@latest; }
+  have typescript-language-server || npm i -g typescript typescript-language-server
+  have bash-language-server || npm i -g bash-language-server
+  have prettier || npm i -g prettier
+  have protols || cargo install protols
+  install_lua_ls
+}
+
 install_ohmyzsh() {
   if [[ ! -d $HOME/.oh-my-zsh ]]; then
     curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -o "$TMP/omz.sh"
@@ -102,6 +147,9 @@ install_starship
 install_go
 install_kubectl
 install_nvm
+install_node
+install_rust
+install_language_servers
 install_ohmyzsh
 
 if [[ $(basename "${SHELL:-}") != zsh ]]; then
