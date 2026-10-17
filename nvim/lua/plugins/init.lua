@@ -13,7 +13,9 @@ vim.pack.add({
     gh('tpope/vim-dispatch'),
 
     gh('f-person/git-blame.nvim'),
-    gh('airblade/vim-gitgutter'),
+    gh('lewis6991/gitsigns.nvim'),
+    gh('sindrets/diffview.nvim'),
+    gh('pwntester/octo.nvim'),
 
     gh('gruvbox-community/gruvbox'),
 
@@ -46,6 +48,7 @@ vim.pack.add({
 
     gh('jamestthompson3/nvim-remote-containers'),
     gh('folke/sidekick.nvim'),
+    gh('github/copilot.vim'),
 })
 
 require("plugins/airline")
@@ -57,3 +60,4 @@ require("plugins/nvim-cmp")
 require("plugins/vim-go")
 require("plugins/sidekick")
 require("plugins/conform")
+require("plugins/review")

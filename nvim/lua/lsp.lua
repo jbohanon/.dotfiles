@@ -79,4 +79,5 @@ vim.lsp.enable({
     'bashls',
     'lua_ls',
     'protols',
+    'copilot',
 })

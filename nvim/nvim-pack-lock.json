@@ -28,9 +28,21 @@
       "rev": "b779a19653e94d4a7d6e668f1d71e48de34591fa",
       "src": "https://github.com/wellle/context.vim"
     },
+    "copilot.vim": {
+      "rev": "a12fd5672110c8aa7e3c8419e28c96943ca179be",
+      "src": "https://github.com/github/copilot.vim"
+    },
+    "diffview.nvim": {
+      "rev": "4516612fe98ff56ae0415a259ff6361a89419b0a",
+      "src": "https://github.com/sindrets/diffview.nvim"
+    },
     "git-blame.nvim": {
       "rev": "5c536e2d4134d064aa3f41575280bc8a2a0e03d7",
       "src": "https://github.com/f-person/git-blame.nvim"
+    },
+    "gitsigns.nvim": {
+      "rev": "070a5d7b985546cc57e1fc61e5bc507fecac6045",
+      "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "glow.nvim": {
       "rev": "5d5954b2f22e109d4a6eba8b2618c5b96e4ee7a2",
@@ -68,6 +80,10 @@
     "nvim-web-devicons": {
       "rev": "58447c1fca354bbf184425e4a8d01deecbd6f3c4",
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
+    },
+    "octo.nvim": {
+      "rev": "af2411604b51cb4a0f3e2de50b1b7cacc2581c48",
+      "src": "https://github.com/pwntester/octo.nvim"
     },
     "plenary.nvim": {
       "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
