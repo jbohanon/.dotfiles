@@ -74,7 +74,7 @@ $gcloud\
 $openstack\
 $azure\
 $crystal\
-$custom\
+${custom.claude_usage}\
 $sudo\
 $cmd_duration\
 $jobs\
@@ -162,3 +162,10 @@ disabled = true
 
 [gcloud]
 format = '[///](238) [$symbol$account(@$domain)(\($region\))]($style) '
+
+[custom.claude_usage]
+command = "claude-usage starship"
+when = "command -v claude-usage >/dev/null"
+shell = ["bash", "--noprofile", "--norc"]
+format = "[///](238) [ $output]($style) "
+style = "bold cyan"

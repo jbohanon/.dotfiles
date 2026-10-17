@@ -5,10 +5,8 @@ export EDITOR=nvim
 if [[ -d "/home/linuxbrew" ]]; then eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"; fi
 
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:/opt/local/bin:$HOME/.node_modules/bin:$PATH
+export PATH=$HOME/bin:$HOME/.local/bin:$HOME/.cargo/bin:/usr/local/bin:/opt/local/bin:$HOME/.node_modules/bin:$PATH
 
-# Add the zig path used by myzvm
-export PATH=$HOME/.zig/zig:$PATH
 
 ulimit -n 65536 200000
 ulimit -f unlimited
@@ -32,6 +30,7 @@ else
 fi
 
 alias pls='sudo'
+alias oc='opencode'
 alias mm='merge-main.sh'
 alias gmc='git merge --continue'
 alias kci='git commit --allow-empty --message "kick CI" && git push'
@@ -77,3 +76,6 @@ alias sz='source $HOME/.zshrc'
 eval "$(starship init zsh)"
 
 # [[ -f "$HOME/.local/share/../bin/env" ]] && . "$HOME/.local/share/../bin/env"
+
+# opencode
+export PATH=/home/jacob/.opencode/bin:$PATH

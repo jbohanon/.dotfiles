@@ -25,6 +25,8 @@ vim.api.nvim_set_option_value('backup', false, {})
 vim.api.nvim_set_option_value('undofile', true, {})
 vim.api.nvim_set_option_value('undodir', vim.fn.expand('~')..'/.vim/undodir', {})
 
+vim.opt.diffopt:append({ 'algorithm:histogram', 'indent-heuristic', 'linematch:60', 'iwhite' })
+
 -- Completion config
 vim.api.nvim_set_option_value('completeopt', 'menu,menuone,noselect,noinsert,preview', {})
 

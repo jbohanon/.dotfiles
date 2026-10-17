@@ -1,72 +1,55 @@
-local Plug = vim.fn['plug#']
+local gh = function(repo)
+    return 'https://github.com/' .. repo
+end
 
-vim.call('plug#begin', '~/.vim/plugged')
+vim.pack.add({
+    gh('voldikss/vim-floaterm'),
+    gh('mbbill/undotree'),
+    gh('wellle/context.vim'),
 
-Plug 'voldikss/vim-floaterm'
-Plug 'mbbill/undotree'
-Plug 'wellle/context.vim'
+    gh('tpope/vim-fugitive'),
+    gh('tpope/vim-commentary'),
+    gh('tpope/vim-surround'),
+    gh('tpope/vim-dispatch'),
 
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-surround'
+    gh('f-person/git-blame.nvim'),
+    gh('lewis6991/gitsigns.nvim'),
+    gh('sindrets/diffview.nvim'),
+    gh('pwntester/octo.nvim'),
 
-Plug 'f-person/git-blame.nvim'
+    gh('gruvbox-community/gruvbox'),
 
-Plug 'gruvbox-community/gruvbox'
+    gh('nvim-lua/plenary.nvim'),
+    gh('ThePrimeagen/harpoon'),
 
-Plug 'nvim-lua/plenary.nvim'
-Plug 'ThePrimeagen/harpoon'
+    gh('nvim-treesitter/nvim-treesitter'),
 
-Plug 'BurntSushi/ripgrep'
+    gh('nvim-telescope/telescope.nvim'),
+    gh('nvim-telescope/telescope-live-grep-args.nvim'),
 
-Plug 'sharkdp/fd'
+    -- Completion
+    gh('neovim/nvim-lspconfig'),
+    gh('hrsh7th/nvim-cmp'),
+    gh('hrsh7th/cmp-nvim-lsp'),
+    gh('hrsh7th/cmp-buffer'),
+    gh('hrsh7th/cmp-path'),
+    gh('hrsh7th/cmp-cmdline'),
+    gh('hrsh7th/cmp-vsnip'),
+    gh('hrsh7th/vim-vsnip'),
 
-Plug 'nvim-treesitter/nvim-treesitter'
+    gh('fatih/vim-go'),
+    gh('stevearc/conform.nvim'),
 
-Plug('nvim-telescope/telescope-fzf-native.nvim', { ['do'] = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' })
+    gh('vim-airline/vim-airline'),
+    gh('vim-airline/vim-airline-themes'),
+    gh('nvim-tree/nvim-web-devicons'),
+    gh('nvim-tree/nvim-tree.lua'),
+    { src = gh('ellisonleao/glow.nvim'), version = 'main' },
 
-Plug('nvim-telescope/telescope-live-grep-args.nvim')
-
-Plug 'nvim-telescope/telescope.nvim'
-
-Plug 'airblade/vim-gitgutter'
-
-Plug 'liuchengxu/vista.vim'
-
--- Completion
-Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/nvim-cmp'
-
--- For vsnip users.
-Plug 'hrsh7th/cmp-vsnip'
-Plug 'hrsh7th/vim-vsnip'
-
--- Go plugins
-Plug 'fatih/vim-go'
-Plug 'Shougo/neocomplete.vim'
-
-Plug 'majutsushi/tagbar'
-
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'kyazdani42/nvim-tree.lua'
-Plug('ellisonleao/glow.nvim', { branch = 'main' })
-Plug 'tpope/vim-dispatch'
-
-Plug 'jamestthompson3/nvim-remote-containers'
-
--- Plug 'epwalsh/obsidian.nvim'
-
-Plug 'ziglang/zig.vim'
-
-Plug 'madox2/vim-ai'
-
-vim.call('plug#end')
+    gh('jamestthompson3/nvim-remote-containers'),
+    gh('folke/sidekick.nvim'),
+    gh('github/copilot.vim'),
+})
 
 require("plugins/airline")
 require("plugins/floaterm")
@@ -75,5 +58,6 @@ require("plugins/telescope")
 require("plugins/treesitter")
 require("plugins/nvim-cmp")
 require("plugins/vim-go")
--- require("plugins/obsidian")
-require("plugins/ai")
+require("plugins/sidekick")
+require("plugins/conform")
+require("plugins/review")

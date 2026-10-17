@@ -3,3 +3,4 @@ nvim/nvim
 tmux/tmux
 zellij/zellij
 zsh/zsh
+node_modules/
